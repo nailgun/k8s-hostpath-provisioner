@@ -1,9 +1,9 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: hostpath
+  name: local-ssd
   annotations:
-    volume.beta.kubernetes.io/storage-class: "example-hostpath"
+    volume.beta.kubernetes.io/storage-class: local-ssd
 spec:
   accessModes:
     - ReadWriteMany

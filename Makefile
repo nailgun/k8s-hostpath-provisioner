@@ -14,14 +14,16 @@
 
 .PHONY: image
 
-IMAGE?=hostpath-provisioner
+IMAGE?=nailgun/k8s-hostpath-provisioner
+GOOS?=linux
+GOARCH?=amd64
 
 image: hostpath-provisioner
 	docker build -t $(IMAGE) -f Dockerfile.scratch .
 
 hostpath-provisioner: $(shell find . -name "*.go")
 	glide install -v --strip-vcs
-	CGO_ENABLED=0 go build -a -ldflags '-extldflags "-static"' -o hostpath-provisioner .
+	GOOS=$(GOOS) GOARCH=$(GOARCH) CGO_ENABLED=0 go build -a -ldflags '-extldflags "-static"' -o hostpath-provisioner .
 
 .PHONY: clean
 clean:
