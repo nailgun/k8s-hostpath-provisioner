@@ -1,0 +1,18 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: node-reader
+rules:
+- apiGroups: ['']
+  resources: ['nodes']
+  verbs: ['get', 'watch', 'list']
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: event-reader
+rules:
+- apiGroups: ['']
+  resources: ['events']
+  verbs: ['get', 'watch', 'list']

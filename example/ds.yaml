@@ -14,7 +14,7 @@ spec:
     spec:
       nodeSelector:
         nailgun.name/hostpath: enabled
-      # serviceAccount: hostpath-provisioner
+      serviceAccount: hostpath-provisioner
       containers:
       - name: hostpath-provisioner
         image: nailgun/k8s-hostpath-provisioner:latest

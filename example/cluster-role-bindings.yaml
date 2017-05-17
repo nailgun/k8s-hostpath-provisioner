@@ -1,0 +1,39 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: hostpath-provisioner
+subjects:
+- kind: ServiceAccount
+  name: hostpath-provisioner
+  namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: system:persistent-volume-provisioner
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: hostpath-provisioner-node-reader
+subjects:
+- kind: ServiceAccount
+  name: hostpath-provisioner
+  namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: node-reader
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: hostpath-provisioner-event-reader
+subjects:
+- kind: ServiceAccount
+  name: hostpath-provisioner
+  namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: event-reader
+  apiGroup: rbac.authorization.k8s.io
