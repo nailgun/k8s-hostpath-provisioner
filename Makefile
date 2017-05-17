@@ -22,7 +22,7 @@ image: hostpath-provisioner
 	docker build -t $(IMAGE) -f Dockerfile.scratch .
 
 hostpath-provisioner: $(shell find . -name "*.go")
-	glide install -v --strip-vcs
+	glide install -v
 	GOOS=$(GOOS) GOARCH=$(GOARCH) CGO_ENABLED=0 go build -a -ldflags '-extldflags "-static"' -o hostpath-provisioner .
 
 .PHONY: clean
