@@ -17,7 +17,7 @@ spec:
       # serviceAccount: hostpath-provisioner
       containers:
       - name: hostpath-provisioner
-        image: hostpath-provisioner:latest
+        image: nailgun/k8s-hostpath-provisioner:latest
         args: ['-root', '/host']
         env:
         - name: NODE_NAME
@@ -25,9 +25,9 @@ spec:
             fieldRef:
               fieldPath: spec.nodeName
         volumeMounts:
-        - name: hostRoot
+        - name: host-root
           mountPath: /host
       volumes:
-      - name: hostRoot
+      - name: host-root
         hostPath:
           path: /
