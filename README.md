@@ -55,6 +55,8 @@ Note StorageClass has `hostPathName` parameter equal to `ssd` which means that p
 `hostpath.nailgun.name/ssd` annotation and it will use hostPath specified in the annotation. If you have more than one node
 with this annotation, node will be selected randomly.
 
+You can also explicity specify node for PVC by adding `nailgun.name/hostpath-node` annotation to the PVC with the node name.
+
 
 ## Limitations
 
