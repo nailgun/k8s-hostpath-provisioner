@@ -31,6 +31,12 @@ $ cd example
 $ kubectl create -f sa.yaml -f cluster-roles.yaml -f cluster-role-bindings.yaml -f ds.yaml
 ```
 
+Label all nodes that can provision hostPath volumes:
+
+```
+$ kubectl label node --all nailgun.name/hostpath=enabled
+```
+
 Now you can test it. You should annotate your nodes with information of available storage:
 
 ```
