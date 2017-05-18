@@ -1,0 +1,21 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: test-pod
+spec:
+  containers:
+  - name: test-pod
+    image: gcr.io/google_containers/busybox:1.24
+    command:
+    - "/bin/sh"
+    args:
+    - "-ec"
+    - "echo hello >> /mnt/test && cat /mnt/test"
+    volumeMounts:
+    - name: hostpath-pvc
+      mountPath: "/mnt"
+  restartPolicy: "Never"
+  volumes:
+  - name: hostpath-pvc
+    persistentVolumeClaim:
+      claimName: local-ssd
