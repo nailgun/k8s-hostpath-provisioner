@@ -46,6 +46,7 @@ const (
 	termLimit                 = controller.DefaultTermLimit
 	storageClassParamName     = "hostPathName"
 	nodeAnnotationFormat      = "hostpath.nailgun.name/%v"
+	pvcAnnotation             = "nailgun.name/hostpath-node"
 )
 
 type hostPathProvisioner struct {
@@ -83,6 +84,12 @@ func (p *hostPathProvisioner) Provision(options controller.VolumeOptions) (*v1.P
 	nodeStoragePath := nodeAnnotations[nodeAnnotationName]
 	if nodeStoragePath == "" {
 		return nil, &controller.IgnoredError{fmt.Sprintf("no `%v` annotation on this node", nodeAnnotationName)}
+	}
+
+	if requestedNodeName, exist := options.PVC.Annotations[pvcAnnotation]; exist {
+		if requestedNodeName != p.nodeName {
+			return nil, &controller.IgnoredError{fmt.Sprintf("PVC requests node `%v`", requestedNodeName)}
+		}
 	}
 
 	hostPath := path.Join(nodeStoragePath, options.PVName)
