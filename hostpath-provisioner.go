@@ -99,6 +99,8 @@ func (p *hostPathProvisioner) Provision(options controller.VolumeOptions) (*v1.P
 		return nil, err
 	}
 
+	glog.Infof("Created directory: %v", localPath)
+
 	pv := &v1.PersistentVolume{
 		ObjectMeta: metav1.ObjectMeta{
 			Name: options.PVName,
@@ -139,6 +141,7 @@ func (p *hostPathProvisioner) Delete(volume *v1.PersistentVolume) error {
 		return err
 	}
 
+	glog.Infof("Removed directory: %v", localPath)
 	return nil
 }
 
